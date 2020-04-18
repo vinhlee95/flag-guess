@@ -35,6 +35,12 @@ class ViewController: UIViewController {
         return button
     }()
     
+    let scoreLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Score: 0"
+        return label
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         countries += ["estonia", "france", "germany", "ireland", "italy", "monaco", "nigeria", "poland", "russia", "spain", "uk", "us"]
@@ -42,13 +48,12 @@ class ViewController: UIViewController {
         self.title = "Guess the flag"
         view.backgroundColor = .lightGray
         
-        setupButtons()
-        view.addSubview(startButton)
-        startButton.anchor(top: nil, bottom: view.safeAreaLayoutGuide.bottomAnchor, left: nil, right: nil, paddingTop: 0, paddingBottom: 12, paddingLeft: 0, paddingRight: 0, width: nil, height: nil)
-        startButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        renderButtons()
+        renderStartButton()
+        renderScoreLabel()
     }
 
-    func setupButtons() {
+    fileprivate func renderButtons() {
         let buttonWidth: CGFloat = view.frame.width*2/3
         let buttonHeight: CGFloat = view.frame.height/6
         
@@ -63,6 +68,18 @@ class ViewController: UIViewController {
         view.addSubview(button3)
         button3.anchor(top: button2.bottomAnchor, bottom: nil, left: nil, right: nil, paddingTop: 24, paddingBottom: 0, paddingLeft: 0, paddingRight: 0, width: buttonWidth, height: buttonHeight)
         button3.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+    }
+    
+    fileprivate func renderScoreLabel() {
+        view.addSubview(scoreLabel)
+        scoreLabel.anchor(top: nil, bottom: startButton.topAnchor, left: nil, right: nil, paddingTop: 0, paddingBottom: 0, paddingLeft: 0, paddingRight: 0, width: nil, height: nil)
+        scoreLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+    }
+    
+    fileprivate func renderStartButton() {
+        view.addSubview(startButton)
+        startButton.anchor(top: nil, bottom: view.safeAreaLayoutGuide.bottomAnchor, left: nil, right: nil, paddingTop: 12, paddingBottom: 12, paddingLeft: 0, paddingRight: 0, width: nil, height: nil)
+        startButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
     }
     
     fileprivate func getRandomCountry() -> String {
@@ -83,6 +100,7 @@ class ViewController: UIViewController {
         
         // Set title to be answer
         self.title = answer?.capitalized
+        scoreLabel.text = "Score: \(String(score))"
     }
 }
 
