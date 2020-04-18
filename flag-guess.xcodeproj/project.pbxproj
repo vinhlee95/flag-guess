@@ -13,6 +13,7 @@
 		1B45A6E5244B30010018A954 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1B45A6E3244B30010018A954 /* Main.storyboard */; };
 		1B45A6E7244B30040018A954 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1B45A6E6244B30040018A954 /* Assets.xcassets */; };
 		1B45A6EA244B30040018A954 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1B45A6E8244B30040018A954 /* LaunchScreen.storyboard */; };
+		1B45A6F3244B32B50018A954 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B45A6F2244B32B50018A954 /* Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		1B45A6E6244B30040018A954 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1B45A6E9244B30040018A954 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1B45A6EB244B30040018A954 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1B45A6F2244B32B50018A954 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +58,7 @@
 		1B45A6DC244B30010018A954 /* flag-guess */ = {
 			isa = PBXGroup;
 			children = (
+				1B45A6F1244B32A30018A954 /* Utils */,
 				1B45A6DD244B30010018A954 /* AppDelegate.swift */,
 				1B45A6DF244B30010018A954 /* SceneDelegate.swift */,
 				1B45A6E1244B30010018A954 /* ViewController.swift */,
@@ -65,6 +68,14 @@
 				1B45A6EB244B30040018A954 /* Info.plist */,
 			);
 			path = "flag-guess";
+			sourceTree = "<group>";
+		};
+		1B45A6F1244B32A30018A954 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				1B45A6F2244B32B50018A954 /* Extensions.swift */,
+			);
+			path = Utils;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -141,6 +152,7 @@
 				1B45A6E2244B30010018A954 /* ViewController.swift in Sources */,
 				1B45A6DE244B30010018A954 /* AppDelegate.swift in Sources */,
 				1B45A6E0244B30010018A954 /* SceneDelegate.swift in Sources */,
+				1B45A6F3244B32B50018A954 /* Extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
