@@ -38,6 +38,9 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         countries += ["estonia", "france", "germany", "ireland", "italy", "monaco", "nigeria", "poland", "russia", "spain", "uk", "us"]
         
+        self.title = "Guess the flag"
+        view.backgroundColor = .white
+        
         setupButtons()
         view.addSubview(startButton)
         startButton.anchor(top: nil, bottom: view.safeAreaLayoutGuide.bottomAnchor, left: nil, right: nil, paddingTop: 0, paddingBottom: 12, paddingLeft: 0, paddingRight: 0, width: nil, height: nil)
@@ -62,7 +65,7 @@ class ViewController: UIViewController {
     }
     
     @objc func handleStart() {
-        print("Start the game")
+        button2.setBackgroundImage(UIImage(named: "france"), for: .normal)
     }
 }
 
