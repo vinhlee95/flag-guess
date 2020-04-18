@@ -11,6 +11,7 @@ import UIKit
 class ViewController: UIViewController {
     private var countries = [String]()
     private var score = 0
+    private var answer: String?
     
     let button1: UIButton = {
         let button = UIButton(type: .system)
@@ -39,7 +40,7 @@ class ViewController: UIViewController {
         countries += ["estonia", "france", "germany", "ireland", "italy", "monaco", "nigeria", "poland", "russia", "spain", "uk", "us"]
         
         self.title = "Guess the flag"
-        view.backgroundColor = .white
+        view.backgroundColor = .lightGray
         
         setupButtons()
         view.addSubview(startButton)
@@ -52,7 +53,7 @@ class ViewController: UIViewController {
         let buttonHeight: CGFloat = view.frame.height/6
         
         view.addSubview(button1)
-        button1.anchor(top: view.safeAreaLayoutGuide.topAnchor, bottom: nil, left: nil, right: nil, paddingTop: 0, paddingBottom: 0, paddingLeft: 0, paddingRight: 0, width: buttonWidth, height: buttonHeight)
+        button1.anchor(top: view.safeAreaLayoutGuide.topAnchor, bottom: nil, left: nil, right: nil, paddingTop: 24, paddingBottom: 0, paddingLeft: 0, paddingRight: 0, width: buttonWidth, height: buttonHeight)
         button1.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         
         view.addSubview(button2)
@@ -64,8 +65,24 @@ class ViewController: UIViewController {
         button3.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
     }
     
+    fileprivate func getRandomCountry() -> String {
+        let randomIndex = Int.random(in: 0..<countries.count)
+        return countries[randomIndex]
+    }
+    
     @objc func handleStart() {
-        button2.setBackgroundImage(UIImage(named: "france"), for: .normal)
+        // Pick 1 string as answer
+        answer = getRandomCountry()
+        let option1 = getRandomCountry()
+        let option2 = getRandomCountry()
+        
+        // Get 2 other random countries and render button background
+        button1.setBackgroundImage(UIImage(named: answer!), for: .normal)
+        button2.setBackgroundImage(UIImage(named: option1), for: .normal)
+        button3.setBackgroundImage(UIImage(named: option2), for: .normal)
+        
+        // Set title to be answer
+        self.title = answer?.capitalized
     }
 }
 
