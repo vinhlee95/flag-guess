@@ -11,20 +11,27 @@ import UIKit
 class ViewController: UIViewController {
     private var countries = [String]()
     private var score = 0
-    private var answer: String?
+    private var answerIndex: Int?
+    private var options = [String]()
     
     let button1: UIButton = {
         let button = UIButton(type: .system)
+        button.tag = 0
+        button.addTarget(self, action: #selector(handleSelectFlag), for: .touchUpInside)
         return button
     }()
     
     let button2: UIButton = {
         let button = UIButton(type: .system)
+        button.tag = 1
+        button.addTarget(self, action: #selector(handleSelectFlag), for: .touchUpInside)
         return button
     }()
     
     let button3: UIButton = {
         let button = UIButton(type: .system)
+        button.tag = 2
+        button.addTarget(self, action: #selector(handleSelectFlag), for: .touchUpInside)
         return button
     }()
     
@@ -82,25 +89,42 @@ class ViewController: UIViewController {
         startButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
     }
     
-    fileprivate func getRandomCountry() -> String {
-        let randomIndex = Int.random(in: 0..<countries.count)
-        return countries[randomIndex]
-    }
-    
     @objc func handleStart() {
-        // Pick 1 string as answer
-        answer = getRandomCountry()
-        let option1 = getRandomCountry()
-        let option2 = getRandomCountry()
+        countries.shuffle()
+        answerIndex = Int.random(in: 0..<2)
+        options += [countries[0], countries[1], countries[2]]
         
         // Get 2 other random countries and render button background
-        button1.setBackgroundImage(UIImage(named: answer!), for: .normal)
-        button2.setBackgroundImage(UIImage(named: option1), for: .normal)
-        button3.setBackgroundImage(UIImage(named: option2), for: .normal)
+        button1.setBackgroundImage(UIImage(named: options[button1.tag]), for: .normal)
+        button2.setBackgroundImage(UIImage(named: options[button2.tag]), for: .normal)
+        button3.setBackgroundImage(UIImage(named: options[button3.tag]), for: .normal)
         
         // Set title to be answer
-        self.title = answer?.capitalized
+        self.title = countries[answerIndex!].uppercased()
         scoreLabel.text = "Score: \(String(score))"
+    }
+    
+    @objc func handleSelectFlag(sender: UIButton) {
+        var title = ""
+        var message = ""
+        if sender.tag == answerIndex {
+            title = "Correct!"
+            message = "You are awesome"
+            score += 1
+        } else {
+            title = "Better luck next time!"
+            message = "That is actually flag of \(options[sender.tag].capitalized)"
+        }
+        
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Continue", style: .default, handler: handleContinue))
+        present(alert, animated: true)
+    }
+    
+    fileprivate func handleContinue(action: UIAlertAction) {
+        // Reset data
+        options = []
+        handleStart()
     }
 }
 
