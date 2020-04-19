@@ -13,6 +13,7 @@ class ViewController: UIViewController {
     private var score = 0
     private var answerIndex: Int?
     private var options = [String]()
+    private var started = false
     
     let button1: UIButton = {
         let button = UIButton(type: .system)
@@ -38,7 +39,7 @@ class ViewController: UIViewController {
     let startButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("Start", for: .normal)
-        button.addTarget(self, action: #selector(handleStart), for: .touchUpInside)
+        button.addTarget(self, action: #selector(handleStartOrEnd), for: .touchUpInside)
         return button
     }()
     
@@ -89,7 +90,17 @@ class ViewController: UIViewController {
         startButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
     }
     
-    @objc func handleStart() {
+    @objc func handleStartOrEnd() {
+        if started == false {
+            started = true
+            startButton.setTitle("Start over", for: .normal)
+            startGame()
+        } else {
+            startOver()
+        }
+    }
+    
+    fileprivate func startGame() {
         countries.shuffle()
         answerIndex = Int.random(in: 0..<2)
         options += [countries[0], countries[1], countries[2]]
@@ -102,6 +113,13 @@ class ViewController: UIViewController {
         // Set title to be answer
         self.title = countries[answerIndex!].uppercased()
         scoreLabel.text = "Score: \(String(score))"
+    }
+    
+    fileprivate func startOver() {
+        score = 0
+        started = false
+        options = []
+        startGame()
     }
     
     @objc func handleSelectFlag(sender: UIButton) {
@@ -124,7 +142,7 @@ class ViewController: UIViewController {
     fileprivate func handleContinue(action: UIAlertAction) {
         // Reset data
         options = []
-        handleStart()
+        startGame()
     }
 }
 
